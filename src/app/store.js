@@ -1,8 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import typingReducer from '../features/typing/typingSlice';
+import { typingApi } from '../features/typing/typingApi';
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    typing: typingReducer,
+    [typingApi.reducerPath]: typingApi.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(typingApi.middleware),
 });
+
+export default store;
